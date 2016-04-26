@@ -1,33 +1,54 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Router, Route, Link, browserHistory, IndexRoute} from 'react-router';
 
-class App extends React.Component {
-
-	constructor(props) {
-		super(props);
-		this.state = { data: '' }
-		this.updateState = this.updateState.bind(this);
-		this.clearInput = this.clearInput.bind(this);
-	}
-
-	updateState(e) {
-		this.setState({ data: e.target.value});
-	}
-	
-	clearInput() {
-		this.setState({ data:'' });
-		ReactDOM.findDOMNode(this.refs.myInput).focus();
-	}
+export class App extends React.Component {
 
 	render() {
 		return (
 			<div>
-				<input type="text" value={this.state.data} onChange={this.updateState} ref="myInput"/>
-				<button onClick={this.clearInput}> Click Here</button>
-				<h4>{this.state.data}</h4>
+				<div>
+					<ul>
+						<li><Link to="home">Home</Link></li>
+						<li><Link to="about">About</Link></li>
+						<li><Link to="contact">Contact</Link></li>
+					</ul>	
+					{this.props.children}
+				</div>
 			</div>
 		);
 	}
 }
 
-export default App;
+export class Home extends React.Component {
+	render() {
+		return (
+			<div>
+				<h1>Home...</h1>
+			</div>
+		);
+	}
+
+}
+
+export class About extends React.Component {
+	render() {
+		return (
+			<div>
+				<h1>About...</h1>
+			</div>
+		);
+	}
+
+}
+
+export class Contact extends React.Component {
+	render() {
+		return (
+			<div>
+				<h1>Contact...</h1>
+			</div>
+		);
+	}
+
+}
