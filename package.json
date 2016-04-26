@@ -4,7 +4,7 @@
   "description": "React Example App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --hot"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,10 @@
   "dependencies": {
     "react": "^15.0.1",
     "react-dom": "^15.0.1"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1"
   }
 }
