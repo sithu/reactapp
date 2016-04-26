@@ -5,29 +5,26 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { data: 'Initial Data' }
+		this.state = { data: '' }
 		this.updateState = this.updateState.bind(this);
+		this.clearInput = this.clearInput.bind(this);
 	}
 
 	updateState(e) {
 		this.setState({ data: e.target.value});
 	}
 	
-	render() {
-		return (
-			<div>
-				<Content myDataProp= {this.state.data} updateStateProp={this.updateState}></Content>
-			</div>
-		);
+	clearInput() {
+		this.setState({ data:'' });
+		ReactDOM.findDOMNode(this.refs.myInput).focus();
 	}
-}
 
-class Content extends React.Component {
 	render() {
 		return (
 			<div>
-				<input type="text" value={this.props.myDataProp} onChange={this.props.updateStateProp}/>
-				<h3>{this.props.myDataProp}</h3>
+				<input type="text" value={this.state.data} onChange={this.updateState} ref="myInput"/>
+				<button onClick={this.clearInput}> Click Here</button>
+				<h4>{this.state.data}</h4>
 			</div>
 		);
 	}
