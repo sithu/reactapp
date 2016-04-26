@@ -2,42 +2,30 @@ import React from 'react';
 
 class App extends React.Component {
 
-	constructor() {
-		super();
-		this.state = {
-			"header": "Default Header",
-			"content": "Default Content"
-		}
-	}
-
 	render() {
 		return (
 			<div>
-				<Header headerProp={this.state.header}/>
-				<Content contentProp={this.state.content}/>
+				<h3>Array: {this.props.propArray}</h3>
+				<h3>Bool: {this.props.propBool} ? "True" : "False"</h3>
+				<h3>Func: {this.props.propFunc (3)}</h3>
+				<h3>Object: {this.props.ObjectName}</h3>
 			</div>
 		);
 	}
 }
 
-class Header extends React.Component {
-	render() {
-		return (
-			<div>
-				<h1>{this.props.headerProp}</h1>
-			</div>
-		);
-	}
+App.propTypes = {
+	propArray:React.PropTypes.array.isRequired,
+	propBool:React.PropTypes.bool.isRequired,
+	propFunc:React.PropTypes.func,
+	propObject:React.PropTypes.object
 }
 
-class Content extends React.Component {
-	render() {
-		return (
-			<div>
-				<h1>{this.props.contentProp}</h1>
-			</div>
-		);
-	}
+App.defaultProps = {
+	propArray: [1,2,3,4],
+	propBool:false,
+	propFunc: function(e) { return e },
+	propObject: { ObjectName: "Object Name" }
 }
 
 export default App;
