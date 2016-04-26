@@ -3,57 +3,67 @@ import ReactDOM from 'react-dom';
 
 class App extends React.Component {
 
-	constructor() {
-		super();
-		this.state = { data: [] }
-		this.setStateHandler = this.myStateHandler.bind(this)
-		this.forceUpdateHandler = this.forceUpdateHandler.bind(this)
-		this.getDomNodeHandler = this.findDomNodeHandler.bind(this)
+	constructor(props) {
+		super(props);
+		this.state = { data: 0 }
+		this.setNewNumber = this.setNewNumber.bind(this);
 	}
 
-	findDomNodeHandler() {
-		var myDiv = document.getElementById('myDiv')
-		React.findDOMNode("myDiv").style.color = 'green'
+	setNewNumber() {
+		this.setState({ data: this.state.data + 1});
 	}
-
-	forceUpdateHandler() {
-		this.forceUpdate()
-		this.setState({ data: []})
-	}
-
-	myStateHandler() {
-		var item = "setState..."
-		var myArray = this.state.data
-		myArray.push(item)
-		this.setState({data: myArray})
-	}
-
+	
 	render() {
 		return (
 			<div>
-				<button onClick={this.forceUpdateHandler}>FORCE</button>
-				<button onClick={this.setStateHandler}>SET STATE</button>
-				<h4>State Array: {this.state.data}</h4>
-				<h4>Random Num: {Math.random()}</h4>
-				<button onClick={this.findDomNodeHandler}>Find Me</button>
-				<div id="myDiv">NODE</div>
+				<button onClick= {this.setNewNumber}>Increment</button>
+				<Content myNumber = {this.state.data}></Content>
 			</div>
 		);
 	}
 }
 
-App.propTypes = {
-	propArray:React.PropTypes.array.isRequired,
-	propBool:React.PropTypes.bool.isRequired,
-	propFunc:React.PropTypes.func,
-	propObject:React.PropTypes.object
-}
+class Content extends React.Component {
+	// this will execute before render
+	componentWillMount() {
+		console.log("Component will mount")
+	}
 
-App.defaultProps = {
-	propArray: [1,2,3,4],
-	propBool:false,
-	propFunc: function(e) { return e },
-	propObject: { ObjectName: "Object Name" }
+	render() {
+		console.log("render")
+	}
+
+	componentDidMount() {
+		console.log("Component did mount")
+	}
+
+	componentWillReceiveProps(newProps) {
+		console.log("Will receive prorps")
+	}
+
+	shouldComponentUpdate(newProps, newState) {
+		return true;
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+		console.log("Will update...");
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		console.log("Did Update...");
+	}
+	
+	componentWillUnmount() {
+		console.log("Will Unmount...");
+	}
+
+	render() {
+		return (
+			<div>
+				<h3>{this.props.myNumber}</h3>
+			</div>
+		);
+	}
 }
 
 export default App;
